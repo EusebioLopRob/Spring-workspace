@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title th:text="${titulo}"></title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<h1 class="col text-muted mt-3" th:text="${titulo}"></h1>
+		</div>
+		<div>
+			<h3 class="col text-muted mt-1" th:text="${subtitulo}"></h3>
+		</div> 
+		
+		<div class="row mt-3">
+			<div th:if="${result.isEmpty()}">No hay productos en la lista</div>
+			<table class="col table table-striped" style="margin-top:15px" th:if="${not result.isEmpty()}">
+				<thead>
+					<tr>
+						<th>Id Producto</th>
+						<th>Producto</th>
+						<th>Fecha de Alta</th>
+						<th>Veces Facturado</th>
+						<th>Total de Ventas</th>
+						<th>Total Facturación</th>
+				</thead>
+				<tbody>
+					<tr th:each="resultado: ${result}">
+						<td th:text="${resultado[0]} "></td>
+						<td th:text="${resultado[1]}"></td>
+						<td th:text="${resultado[2]}"></td>
+						<td th:text="${resultado[3]}"></td>
+						<td th:text="${resultado[4]}"></td>
+						<td th:text="${resultado[5]}+€"></td>
+				</tbody>
+			</table>
+		</div>

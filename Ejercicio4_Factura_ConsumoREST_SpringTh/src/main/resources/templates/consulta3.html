@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="col text-muted mt-3" th:text="${titulo}"></h1>
+        </div>
+        <div class="row">
+            <hr class="col" />
+        </div>       
+        <div class="row">
+			<div th:if="${productos.isEmpty()}">No hay productos en la
+				lista</div>
+			<table class="col table table-striped" style="margin-top: 15px"
+				th:if="${not productos.isEmpty()}">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Fecha Alta</th>						
+				</thead>
+				<tbody>
+					<tr th:each="producto: ${productos}">
+						<td th:text="${producto.id}"></td>
+						<td th:text="${producto.nombre}"></td>
+						<td th:text="${producto.precio}"></td>
+						<td th:text="${#dates.format(producto.createAt, 'dd-MM-yyyy')}"></td>						
+				</tbody>
+			</table>
+		</div>

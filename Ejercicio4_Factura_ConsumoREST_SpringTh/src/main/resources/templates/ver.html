@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<title th:text="${titulo}"></title>
+</head>
+
+<body>
+	<div class="container">
+	<!-- Este script ejecuta el alerte si el flashAttribute es true  -->
+		<script th:if="${result}">
+			alert("Factura eliminada con éxito");
+   		</script>
+
+	<!-- Aquí empieza la tabla  -->
+		<div class="row">
+			<h1 class="col text-muted mt-3" th:text="${titulo}">Detalle de
+				cliente</h1>
+		</div>
+		<div class="row">
+			<hr class="col" />
+		</div>
+		<div class="card text-left mb-3">
+			<div class="card-header"
+				th:text="${cliente.nombre}+' '+${cliente.apellido}">Nombre y
+				apellidos</div>
+			<div class="card-body">
+				<table class="table table-responsive">
+					<tbody>
+						<tr>
+							<td th:text="${cliente.email}">Correo@eletronico.com</td>
+						</tr>
+						<tr>
+							<td th:text="${cliente.createAt}">Fecha</td>
+						</tr>
+					</tbody>
+				</table>
+				<a th:href="@{/crearFactura}" class="btn btn-primary">Crear
+					factura</a>
+				<div class="row">
+					<hr class="col" />
+				</div>
+				<div class="form-group">
+					<div th:if="${facturas.isEmpty()}" class="alert alert-primary"
+						role="alert">
+						No hay facturas asignadas al cliente <span
+							th:text="${cliente.nombre}+' '+${cliente.apellido}">Nombre
+							cliente</span>
+					</div>
+					<div th:if="${not facturas.isEmpty()}">
+						<table class="col table table-striped" style="margin-top: 15px">
+							<thead class="thead-dark">
+								<tr>
+									<th>Id</th>
+									<th>Descripción</th>
+									<th>Fecha</th>
+									<th>Total</th>
+									<th>Ver</th>
+									<th>Eliminar</th>
+							</thead>
+							<tbody>
+								<tr th:each="factura: ${facturas}">
+									<td th:text="${factura.id}"></td>
+									<td th:text="${factura.descripcion}"></td>
+									<td th:text="${factura.createAt}"></td>
+									<td th:text="${totales[factura.id]}"></td>
+									<td><a class="btn btn-primary"
+										th:href="@{/editarFact/}+${factura.id}">editar</a></td>
+									<td><a class="btn btn-danger"
+										th:href="@{/eliminarFact/}+${factura.id}"
+										onclick="return confirm('¿Estás seguro que quieres eliminar?')">eliminar</a></td>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-success mb-3" th:href="@{/listar}">Volver</a>
+	</div>
+</body>
+
+</html>

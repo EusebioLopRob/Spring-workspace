@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title th:text="${titulo}">Listado de alquileres</title>
+</head>
+
+<body>
+	<h1 th:text="${titulo}">Alquiler de maquinaria de Jardineria</h1>
+	<div class="container">
+		<p>Buscar</p>
+		<form th:action="@{/form}" th:object="${cliente}" method="post">
+			<div class="container">
+				<p>Nombre del cliente: *</p>
+				<hr />
+				<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+					th:errorclass="'form-control alert-danger'">
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+					th:errors="*{nombre}"></small>
+				<hr />
+			</div>
+			<input type="submit" value="Ver maquinaria que ha alquilado" />
+		</form>
+		<div th:if="${alquieres.isEmpty()}">No hay alquileres en la lista</div>
+		<table class="table table-striped pt-2" th:if="${not alquieres.isEmpty()}">
+			<tr>
+				<th>Código de producto</th>
+				<th>Nombre de Producto</th>
+				<th>Fecha inicio del alquiler</th>
+				<th>Fecha fin del alquiler</th>
+				<th>Precio total a pagar</th>
+				<th>Modificar</th>
+				<th>Eliminar</th>
+			</tr>
+			<tr th:each="alquiler: ${alquieres}">
+				<td th:text="${alquiler.id.codProd}"></td>
+				<td th:text="${alquiler.nombre}"></td>
+				<td th:text="${alquiler.fechainicio}"></td>
+				<td th:text="${alquiler.fechafin}"></td>
+				<td th:text="${alquiler.preciodia}"></td>
+				<td><a class="btn btn-primary" th:href="@{/form/}+${alquiler.codCli}">Modificar</a></td>
+				<td><a class="btn btn-danger" th:href="@{/eliminar/}+${alquiler.codCli}"
+						th:data-confirm-delete="|Esta seguro que quiere el alquiler?|"
+						onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Eliminar</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="footer">
+		IES Julio Verne Marzo 22
+	</div>
+</body>
+
+</html>

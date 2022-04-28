@@ -1,0 +1,34 @@
+***********************
+ÍNDICE E INSTRUCCIONES SOBRE PLANTILLA PARA EXAMEN
+***********************
+
+1.- Flujo de DATOS:
+
+-- Entidad (Modelo) y relaciones dadas por las anotaciones (Intentar SIEMPRE bidireccionalidad)
+-- DAO: Declaramos que extiende de los repositorios CRUD y las Queries personalizadas
+-- IEntidadService: Se listan los metodos que se van a usar.
+-- EntidadServiceImpl: Implementa dichos métodos (Llama al DAO y devuelve el resultado)
+-- Controlador: Declara servicios, llama a los métodos y envía los resultados a las vistas.
+				Mediante mapeo de rutas.
+-- Vistas(Templates): 	Ficheros html que tienen variables Thymeleaf inyectadas por un controlador.
+						Mediante interacción del usuario se envían datos a los controladores y se
+						cierra el ciclo.
+
+2.- MARCAPÁGINAS EN ESTE PROYECTO:
+
+-- application.properties: src/main/resources
+		- En spring.datasource.url cambiamos el nombre de la base de datos
+		- spring.jpa.hibernate.ddl-auto= create(la primera vez), validate(la segunda), update(el resto)
+		- Cambiar usuario y contraseña según pida, así como el puerto (si necesario)
+
+-- <!-- Este script ejecuta el alerte si el flashAttribute es true  -->
+		<script th:if="${result}">
+			alert("Factura eliminada con éxito");
+   		</script>
+   		
+   		Esto esta en ver.html y el result viene de FacturaController. 
+   		El script solo se ejecuta si result es true, pero podríamos condicionarlo
+   		como quisieramos en el RedirectAttributes. 
+   		
+<body th:onload="alert(/*[[${titulo}]]*/)">
+		

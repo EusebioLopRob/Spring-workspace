@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/home/Eusebio/Spring-workspace/Ejercicio4_Factura_ConsumoREST_SpringTh"/>
+			<item value="/home/Eusebio/Spring-workspace/Eusebio_Lopez_Robledo_SPRING_MarzoEV2"/>
+			<item value="/home/Eusebio/Spring-workspace/Ejercicio4_Factura_ConsumoREST_SpringTh/Ejercicio4_Factura_ConsumoREST_SpringTh"/>
+			<item value="/home/Eusebio/Spring-workspace/Factura_eusebio_lopez_robledo_examen"/>
+			<item value="/home/Eusebio/Spring-workspace/Ejercicio3_SpringTh_Factura_Efren"/>
+			<item value="/home/Eusebio/Spring-workspace/ApiRest_version01"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

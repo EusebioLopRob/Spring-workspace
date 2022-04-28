@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title>Inicio de la aplicación</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1 class="col text-muted"style="margin-top: 20px;">Gestión de alquileres</h1>
+		</div>
+		<div class="row">
+			<hr class="col"/>
+		</div>
+		<div class="row">
+			<a type="" th:href="@{/listar}" class="btn btn-success">Alquileres</a>
+		</div>
+
+	</div>
+
+</body>
+</html>

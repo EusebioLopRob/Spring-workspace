@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.ejemplos.models.service.IProductoService"/>
+    <fullyQualifiedTypeName name="model.Jardineria"/>
+    <fullyQualifiedTypeName name="com.ejemplos.models.entity.AlquilerPK"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+</qualifiedTypeNameHistroy>
