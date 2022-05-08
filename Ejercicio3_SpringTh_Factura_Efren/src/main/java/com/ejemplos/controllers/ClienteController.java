@@ -63,27 +63,20 @@ public class ClienteController {
 		return "form";
 	}
 	
-	//Para guardar los datos editados del cliente
-//	@RequestMapping(value="/form", method=RequestMethod.POST)
-//	public String guardar(Cliente cliente) {
-//		clienteService.save(cliente);
-//		return "redirect:listar";
-//	}
-	
-	//GUARDAR UN CLIENTE
-	//Vamos a meter ahora validaciones
+
 	@RequestMapping(value="/form", method=RequestMethod.POST)
 	public String guardar(@Valid Cliente cliente, BindingResult result, Model model, SessionStatus status) {
 		
 		if(result.hasErrors()) {
-			model.addAttribute("titulo", "Editar cliente");
+			model.addAttribute("titulo", "Introducir datos del cliente");
 			return "form";
 		}
 		
-		clienteService.save(cliente);
-		//Al ejecutar setComplete() elimina el objeto cliente de la sesión
-		status.setComplete();
-		return "redirect:listar";
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("titulo", "Datos del cliente");
+		
+		
+		return "verCliente";
 	}
 	
 	//Crear cliente
@@ -93,7 +86,7 @@ public class ClienteController {
 			//Creo un cliente vacío y machaco el de la sesión
 			Cliente cliente=new Cliente();
 			model.addAttribute("cliente", cliente);
-			model.addAttribute("titulo", "Crear cliente");
+			model.addAttribute("titulo", "Introducir datos del cliente");
 			
 			return "form";
 
