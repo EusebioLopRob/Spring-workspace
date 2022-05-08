@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title>Inicio de la aplicación</title>
+</head>
+<body>
+	<div class="container bg-info">
+		<h1>Formulario de registro de cliente</h1>
+		<form th:action="@{/mostrar}" th:object="${cliente}" method="post">
+			<div class="container">
+				<label for="codigo">Codigo: </label>
+				<input type="text" id="codigo" th:field="*{cod_cli}">
+				<br>
+				<label for="nombre">Nombre: </label>
+				<input type="text" id="nombre" th:field="*{nombre}">
+				<br>
+				<label for="direccion">Dirección: </label>
+				<input type="text" id="direccion" th:field="*{direccion}">
+			</div>
+			<input type="submit" value="Enviar" />
+		</form>
+	</div>
+	
+</body>
+</html>

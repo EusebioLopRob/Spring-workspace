@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Built-By: keshak
 Build-Jdk: 17.0.1
-Implementation-Title: EEjercicio4_Factura_ConsumoREST_SpringTh
+Implementation-Title: eusebio_lopez_actividad7
 Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.ejemplos
+Implementation-Vendor-Id: eusebio_lopez_actividad7
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
- -starter-parent/Eusebio_Lopez_Robledo_SPRING_MarzoEV2
+ -starter-parent/eusebio_lopez_actividad7
 Created-By: Maven Integration for Eclipse
 

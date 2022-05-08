@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title>Mostrar Cliente</title>
+</head>
+<body>
+	<div class="container bg-info">
+		<h1>Datos del cliente</h1>
+		<p>Código<spam th:text="${cliente.cod_cli}"></spam></p>
+		<p>Nombre: <spam th:text="${cliente.nombre}"></spam></p>
+		<p>Dirección<spam th:text="${cliente.direccion}"></spam></p>
+	</div>
+	<a type="" th:href="@{/index}" class="btn btn-success mt-4">Volver al index</a>
+</body>
+</html>
