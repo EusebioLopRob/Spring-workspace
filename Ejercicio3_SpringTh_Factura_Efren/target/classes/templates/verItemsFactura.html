@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<title th:text="${titulo}"></title>
+</head>
+
+<body>
+	<div class="container">
+		<!-- Este script ejecuta el alerte si el flashAttribute es true  -->
+		<script th:if="${result}">
+			alert("Factura eliminada con éxito");
+		</script>
+
+		<!-- Aquí empieza la tabla  -->
+		<div class="row">
+			<h1 class="col text-muted mt-3" th:text="${titulo}">Resultado Pruebas:</h1>
+		</div>
+		<div class="row">
+			<hr class="col" />
+		</div>
+		<div class="card text-left mb-3">
+			<div class="card-header">
+				<h1> ITEMS </h1>
+			</div>
+			<div class="card-body">
+
+				<div>
+					<div th:if="${items.isEmpty()}" class="alert alert-primary" role="alert">
+						No hay items 
+					</div>
+					<div th:if="${not items.isEmpty()}">
+						<table class="col table table-striped" style="margin-top: 15px">
+							<thead class="thead-dark">
+								<tr>
+									<th>Id del Item</th>
+									<th>Nombre del Cliente</th>
+									<th>Producto Comprado</th>									
+							</thead>
+							<tbody>
+								<tr th:each="item: ${items}">
+									<td th:text="${item.id}"></td>
+									<td th:text="${item.factura.cliente.nombre}"></td>
+									<td th:text="${item.producto.nombre}"></td>									
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-success mb-3" th:href="@{/listar}">Volver</a>
+	</div>
+</body>
+
+</html>
