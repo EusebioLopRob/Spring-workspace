@@ -14,15 +14,11 @@
 		<h1 th:text="${titulo}"></h1>
 		<p>Nombre: <span th:text="${cliente.nombre}"></span></p>
 		<p>Apellido: <span th:text="${cliente.apellido}"></span></p>
-		<p>Género: <span th:text="${cliente.gender}"></span></p>
 		<p>Email: <span th:text="${cliente.email}"></span></p>
 		<p>Fecha de alta: <span th:text="${cliente.createAt}"></span></p>
-		<p>Suscriptor: <span th:text="${cliente.subscriber? 'Sí' : 'No'}"></span></p>
-		<p>Estado civil: <span th:text="${cliente.civilStatus? 'Casado' : 'Soltero'}"></span></p>
 		<div class="mt-4">
-			<a type="" th:href="@{/datos}" class="btn btn-primary">Volver al formulario</a>
+			<a type="" th:href="@{/form}" class="btn btn-primary">Volver al formulario</a>
 		</div>
-		<img src="img/clientes.jpg" alt="clientes"/>
 	</div>
 </body>
 

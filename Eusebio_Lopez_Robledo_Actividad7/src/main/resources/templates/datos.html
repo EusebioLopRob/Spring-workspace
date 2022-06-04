@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<h1 class="col text-muted mt-3" th:text="${titulo}"></h1>
+			<small class="mt-4 mx-4" th:text="${'Número de envíos de formulario: '+session.contador}"></small >
+		</div>
+		<div class="row">
+			<hr class="col"/>
+		</div>
+
+		<!-- Se puede crear también un div aparte para los errores -->
+		<div th:object="${cliente}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
+		</div>
+		<!-- la etiqueta th:object indica cual es el objeto al que se refieren los atributos del formulario -->
+		<!-- El th:action="@{/form}" envía los datos al método del controlador
+		que tiene la anotación @RequestMapping(value="/form", ...) -->
+		<form th:action="@{/datos}" th:object="${cliente}" method="post">
+			<table>
+				<div class="form-group row">
+					<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="apellido" th:field="*{apellido}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="genero" class="col-sm-2 col-form-label">Género</label>
+					<div class="col-sm-10">
+						<select type="text" class="form-control" id="genero" th:field="*{gender}">
+							<option value="Mujer">Mujer</option>
+							<option value="Hombre">Hombre</option>
+							<option value="Otro">Otro</option>
+						</select>
+					</div>
+				</div>
+				
+				<!--
+				<div class="form-group row">
+					<label for="prueba" class="col-sm-2 col-form-label">Prueba</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="prueba" th:value="${session.prueba}">
+					</div>
+				</div>
+				-->
+				
+				<div class="form-group row">
+					<label for="email" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="email" th:field="*{email}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="fecha" class="col-sm-2 col-form-label">Fecha de alta</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="fecha" th:field="*{createAt}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+					</div>
+				</div>
+				<div class="form-check my-4">
+				  <input class="form-check-input" type="checkbox" value="" id="subs" checked>
+				  <label class="form-check-label" for="subs" th:field="*{subscriber}">
+				    Suscribir al boletín de noticias
+				  </label>
+				</div>
+				<p class="mb-0">Estado civil:</p>
+				<div class="form-check mt-0">
+				  <input class="form-check-input" type="radio" name="civil" id="civil1" th:value="${true}" th:field="*{civilStatus}" checked>
+				  <label class="form-check-label" for="civil">
+				    Casado
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="civil" th:value="${false}" th:field="*{civilStatus}" id="civil2">
+				  <label class="form-check-label" for="civil">
+				    Soltero
+				  </label>
+				</div>
+				<div class="form-group row mt-4">
+					<div class="col-sm-10">
+						<input type="submit" class="btn btn-primary" value="Aceptar">
+					</div>
+				</div>
+			</table>
+			</hr>
+			<a th:href="@{/reset}" class="btn btn-primary">Resetear contador</a>
+		</form>
+</body>
+</html>

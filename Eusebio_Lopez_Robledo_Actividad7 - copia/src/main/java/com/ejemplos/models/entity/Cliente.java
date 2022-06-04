@@ -39,10 +39,6 @@ public class Cliente implements Serializable {
 	@NotEmpty
 	@Email
 	private String email;
-	
-	private String gender;
-	private boolean subscriber;
-	private boolean civilStatus;
 
 	@NotNull
 	@Column(name="create_at")
@@ -55,12 +51,6 @@ public class Cliente implements Serializable {
 	@JoinColumn(name="id_cliente")
 	private List<Factura> facturas;
 
-	public String getGender() {
-		return this.gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
 
 	public Long getId() {
 		return id;
@@ -113,26 +103,6 @@ public class Cliente implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-
-	public boolean isSubscriber() {
-		return subscriber;
-	}
-	public void setSubscriber(boolean subscriber) {
-		this.subscriber = subscriber;
-	}
-	public boolean isCivilStatus() {
-		return civilStatus;
-	}
-	public void setCivilStatus(boolean civilStatus) {
-		this.civilStatus = civilStatus;
-	}
-	@Override
-	public String toString() {
-		return "Cliente [id=" + this.id + ", nombre=" + this.nombre + ", apellido=" + this.apellido + ", email=" + this.email
-				+ ", createAt=" + this.createAt + ", genero=" + this.gender +"]";
-	}
-
 
 	private static final long serialVersionUID = 1L;
 
