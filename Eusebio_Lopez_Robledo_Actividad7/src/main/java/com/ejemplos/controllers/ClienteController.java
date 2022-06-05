@@ -97,7 +97,7 @@ public class ClienteController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Introducir datos del cliente");
-			return "form";
+			return "datos";
 		}
 		model.addAttribute("contador", contador+1);
 		

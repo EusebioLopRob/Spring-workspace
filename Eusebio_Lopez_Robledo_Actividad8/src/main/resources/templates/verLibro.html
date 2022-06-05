@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<title th:text="${titulo}"></title>
+</head>
+
+<body>
+	<div class="container border p-4">
+		<h1 th:text="${titulo}"></h1>
+		<p>Isbn: <span class="text-success fw-bold" th:text="${libro.isbn}"></span></p>
+		<p>Título: <span class="text-success fw-bold" th:text="${libro.titulo}"></span></p>
+		<p>Autor: <span class="text-success fw-bold" th:text="${libro.autor}"></span></p>
+		<p>Prestado: <span class="text-success fw-bold" th:text="${libro.prestado? 'Sí':'No'}"></span></p>
+		<div class="mt-4">
+			<a type="" th:href="@{/form}" class="btn btn-primary">Volver al formulario</a>
+		</div>
+	</div>
+</body>
+
+</html>

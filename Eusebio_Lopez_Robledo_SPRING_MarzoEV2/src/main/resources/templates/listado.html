@@ -8,48 +8,72 @@
 </head>
 
 <body>
-	<h1 th:text="${titulo}"></h1>
-	<div class="container">
-		<p>Buscar</p>
-		<form th:action="@{/form}" th:object="${cliente}" method="post">
-			<div class="container">
-				<p>Nombre del cliente: *</p>
-				<hr />
-				<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
-					th:errorclass="'form-control alert-danger'">
-				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
-					th:errors="*{nombre}"></small>
-				<hr />
+	
+	<div class="container-fluid">
+		<h2 class="px-2 pb-2 pt-1 bg-primary text-white my-2" th:text="${titulo}"></h2>
+		
+		<div style="background-color: lightgray;" class="p-2 mx-4">
+			<h6>Buscar</h6>
+			<form th:action="@{/form}" th:object="${cliente}" method="post">
+				<div class="w-25 bg-white p-2 mb-2 text-secondary">
+					<span>Nombre del cliente: *</span>
+					<hr />
+					<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+						th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+						th:errors="*{nombre}"></small>
+					<hr />
+				</div>
+				<button type="submit" class="rounded px-3 py-1">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+					</svg>
+					<span>Ver maquinaria que ha alquilado</span>
+				</button>
+			</form>
+			<h4 class="mt-4 text-center" th:if="${hayCliente}">Alquieres de: <span class="text-success" th:text="${cliente.nombre}"></span></h4>
+			<h4 class="mt-4 text-center" th:if="${not hayCliente}">Lista de todos los alquileres</h4>
+			<div th:if="${alquileres.isEmpty()}" class="m-5 text-danger text-center">
+				<span class="border p-2 border-danger">No hay alquileres en la lista</span>
 			</div>
-			<input type="submit" value="Ver maquinaria que ha alquilado" />
-		</form>
-		<div th:if="${alquieres.isEmpty()}">No hay alquileres en la lista</div>
-		<table class="table table-striped pt-2" th:if="${not alquieres.isEmpty()}">
-			<tr>
-				<th>Código de producto</th>
-				<th>Nombre de Producto</th>
-				<th>Fecha inicio del alquiler</th>
-				<th>Fecha fin del alquiler</th>
-				<th>Precio total a pagar</th>
-				<th>Modificar</th>
-				<th>Eliminar</th>
-			</tr>
-			<tr th:each="alquiler: ${alquieres}">
-				<td th:text="${alquiler.id.codProd}"></td>
-				<td th:text="${alquiler.nombre}"></td>
-				<td th:text="${alquiler.fechainicio}"></td>
-				<td th:text="${alquiler.fechafin}"></td>
-				<td th:text="${alquiler.preciodia}"></td>
-				<td><a class="btn btn-primary" th:href="@{/form/}+${alquiler.id.codCli}">Modificar</a></td>
-				<td><a class="btn btn-danger" th:href="@{/eliminar/}+${alquiler.id.codCli}"
-						th:data-confirm-delete="|Esta seguro que quiere el alquiler?|"
-						onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Eliminar</a></td>
-			</tr>
-		</table>
+			<table class="table table-striped mt-3 bg-white" th:if="${not alquileres.isEmpty()}">
+				<tr style="background-color: #BEBEBE;" class="text-center">
+					<th class="border border-dark">Código de producto</th>
+					<th class="border border-dark">Nombre de Producto</th>
+					<th class="border border-dark">Fecha inicio del alquiler</th>
+					<th class="border border-dark">Fecha fin del alquiler</th>
+					<th class="border border-dark">Precio total a pagar</th>
+					<th class="border border-dark" colspan="2">Acciones</th>
+				</tr>
+				<tr th:each="alquiler: ${alquileres}" class="text-center">
+					<td th:text="${alquiler.id.codProd}" class="border border-dark"></td>
+					<td th:text="${alquiler.jardineria.nombre}" class="border border-dark"></td>
+					<td th:text="${alquiler.fechainicio}" class="border border-dark"></td>
+					<td th:text="${alquiler.fechafin}" class="border border-dark"></td>
+					<td th:text="${alquiler.preciodia}" class="border border-dark"></td>
+					<td class="border border-dark">
+						<a class="btn btn-primary" 
+							th:href="@{/modificar/{codCli}/{codProd}/{fechainicio}(codCli = ${alquiler.id.codCli}, codProd = ${alquiler.id.codProd}, fechainicio = ${alquiler.id.fechainicio})}">
+							Modificar
+						</a>
+					</td>
+					<td class="border border-dark">
+						<a class="btn btn-danger" 
+							th:href="@{/eliminar/{codCli}/{codProd}/{fechainicio}(codCli = ${alquiler.id.codCli}, codProd = ${alquiler.id.codProd}, fechainicio = ${alquiler.id.fechainicio})}"
+							th:data-confirm-delete="|Esta seguro que quiere el alquiler?|"
+							onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+							Eliminar
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="px-4 py-2 my-2 text-center" style="background-color: skyblue;">
+			IES Julio Verne Marzo 22
+		</div>
 	</div>
-	<div class="footer">
-		IES Julio Verne Marzo 22
-	</div>
+	
 </body>
 
 </html>
