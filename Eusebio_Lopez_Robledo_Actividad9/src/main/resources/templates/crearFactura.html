@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<h1 class="col text-muted mt-3" th:text="${titulo}"></h1>
+		</div>
+		<div class="row">
+			<hr class="col"/>
+		</div>
+		
+		<!-- Se puede crear también un div aparte para los errores -->
+		<div th:object="${factura}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
+		</div>
+		<!-- la etiqueta th:object indica cual es el objeto al que se refieren los atributos del formulario -->
+		<!-- El th:action="@{/form}" envía los datos al método del controlador
+		 que tiene la anotación @RequestMapping(value="/form", ...) -->
+		<form th:action="@{/crearFactura}" th:object="${factura}" method="post">
+			<table>
+				<div class="form-group row">
+					<label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="observacion" class="col-sm-2 col-form-label">Observacion</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="observacion" th:field="*{observacion}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('observacion')}" th:errors="*{observacion}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="fecha" class="col-sm-2 col-form-label">Fecha factura</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="fecha" th:field="*{createAt}"
+							th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<input type="submit" class="btn btn-primary" value="Guardar">
+					</div>
+				</div>
+			</table>
+
+		</form>
+</body>
+</html>

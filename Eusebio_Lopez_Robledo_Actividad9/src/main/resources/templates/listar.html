@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="col text-muted mt-3" th:text="${titulo}"></h1>
+        </div>
+        <div class="row">
+            <hr class="col" />
+        </div>
+        <div class="row">
+            <a type="" th:href="@{/form}" class="btn btn-success">Crear cliente</a>
+        </div>
+        <div class="row">
+            <div th:if="${clientes.isEmpty()}">No hay usuarios en la lista</div>
+            <table class="col table table-striped" style="margin-top:15px" th:if="${not clientes.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Fecha</th>
+                        <th>Crear factura</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                        </td>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente: ${clientes}">
+                        <td><a class="btn btn-primary" th:text="${cliente.id}" th:href="@{/ver/}+${cliente.id}"></a></td>
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.apellido}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td th:text="${cliente.createAt}"></td>
+                        <td><a class="btn btn-success" th:href="@{/crearFacturaCliente/}+${cliente.id}">crear factura</a></td>
+                        <td><a class="btn btn-primary" th:href="@{/form/}+${cliente.id}">editar</a></td>
+                        <td><a class="btn btn-danger" th:href="@{/eliminar/}+${cliente.id}" onclick="return confirm('¿Estás seguro que quieres eliminar?')">eliminar</a></td>
+                        </td>
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-success mb-3" href="http://localhost:8080">inicio</a>
+    </div>
+</body>
+
+</html>
