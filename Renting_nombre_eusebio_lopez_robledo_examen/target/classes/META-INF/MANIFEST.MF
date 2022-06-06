@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Built-By: Eusebio
 Build-Jdk: 17.0.1
-Implementation-Title: Eusebio_Lopez_Robledo_Actividad10
+Implementation-Title: Renting_nombre_eusebio_lopez_robledo_examen
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: com.ejemplos
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
- -starter-parent/Eusebio_Lopez_Robledo_Actividad10
+ -starter-parent/Renting_nombre_eusebio_lopez_robledo_examen
 Created-By: Maven Integration for Eclipse
 

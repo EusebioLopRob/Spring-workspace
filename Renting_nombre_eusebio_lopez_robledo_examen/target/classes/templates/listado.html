@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title th:text="${titulo}"></title>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<h2 class="px-2 pb-2 pt-1 bg-primary text-white my-2" th:text="${titulo}"></h2>
+		<div class="p-2 mx-4">
+			<div th:if="${coches.isEmpty()}" class="m-5 text-danger text-center">
+				<span class="border p-2 border-danger">No hay coches en la lista</span>
+			</div>
+			<table class="table table-striped mt-3 bg-white" th:if="${not coches.isEmpty()}">
+				<tr style="background-color: #BEBEBE;" class="text-center">
+					<th class="border border-dark">Matrícula</th>
+					<th class="border border-dark">Modelo</th>
+					<th class="border border-dark">Marca</th>
+					<th class="border border-dark">Alquilado</th>
+				</tr>
+				<tr th:each="coche: ${coches}" class="text-center">
+					<td th:text="${coche.matricula}" class="border border-dark"></td>
+					<td th:text="${coche.modelo}" class="border border-dark"></td>
+					<td th:text="${coche.marca}" class="border border-dark"></td>
+					<td th:text="${coche.alquilado? 'Sí':'No'}" class="border border-dark"></td>
+				</tr>
+			</table>
+		</div>
+		<a th:href="@{/crear}" class="btn btn-success mt-4">Volver al registro</a>
+	</div>
+</body>
+</html>

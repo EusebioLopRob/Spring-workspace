@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title th:text="${titulo}"></title>
+</head>
+
+<body>
+	<div class="container-fluid w-75 p-5" style="background-color: lightpink;">
+		<form th:action="@{/buscar}" th:object="${coche}" method="post">
+			<h1 th:text="${titulo}"></h1>
+			<div class="form-group row">
+				<label for="matricula" class="col-sm-2 col-form-label">Matrícula</label>
+				<div class="col-sm-10">
+					<input 
+						type="text" 
+						class="form-control" 
+						id="matricula" 
+						th:field="*{matricula}"
+						th:errorclass="'form-control alert-danger'">
+					<small 
+						class="form-text text-danger" 
+						th:if="${#fields.hasErrors('matricula')}" 
+						th:errors="*{matricula}">
+					</small>
+				</div>
+			</div>	
+			<button type="submit" class="btn btn-info text-white mt-4" >
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+				  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+				  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+				</svg>
+				<span>Editar</span>
+			</button>	
+		</form>
+			<div th:if="${encontrado}" class="mt-4"> 
+				<h2 class="text-success">Coche encontrado</h2>
+				<form th:action="@{/editar}" th:object="${coche}" method="post">
+					<div class="form-group row">
+						<label for="matricula" class="col-sm-2 col-form-label">Matrícula</label>
+						<div class="col-sm-10">
+							<input 
+								type="text" 
+								class="form-control" 
+								id="matricula" 
+								th:field="*{matricula}"
+								disabled>
+						</div>
+					</div>	
+					<div class="form-group row">
+						<label for="modelo" class="col-sm-2 col-form-label">Modelo</label>
+						<div class="col-sm-10">
+							<input 
+								type="text" 
+								class="form-control" 
+								id="modelo" 
+								th:field="*{modelo}"
+								th:errorclass="'form-control alert-danger'">
+							<small 
+								class="form-text text-danger" 
+								th:if="${#fields.hasErrors('modelo')}" 
+								th:errors="*{modelo}">
+							</small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marca" class="col-sm-2 col-form-label">Marca</label>
+						<div class="col-sm-10">
+							<input 
+								type="text" 
+								class="form-control" 
+								id="marca" 
+								th:field="*{marca}"
+								th:errorclass="'form-control alert-danger'">
+							<small 
+								class="form-text text-danger" 
+								th:if="${#fields.hasErrors('marca')}" 
+								th:errors="*{marca}">
+							</small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="alquilado" class="col-sm-2 col-form-label">Alquilado</label>
+						<div class="col-sm-10">
+							<input 
+								type="checkbox" 
+								class="form-control" 
+								id="marca" 
+								th:field="*{alquilado}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2">
+							<button type="submit" class="btn btn-primary text-white mt-4">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+									<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+									<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+								</svg>
+								<span>Actualizar</span>
+							</button>	
+							<div th:if="${actualizado}" class="py-2">
+								<span class="text-success">Coche actualizado con éxito en la base de datos</span>
+							</div>
+						</div>
+						<div class="col-2">
+							<a th:href="@{/eliminar/}+${coche.matricula}" class="btn btn-danger mt-4">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
+									<path d="M11.4.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+								</svg>
+								<span>Eliminar</span>
+							</a>
+							<div th:if="${errorEliminacion}" class="mt-2">
+								<h6 class="text-danger">El coche está alquilado, no se puede eliminar</h6>
+							</div>
+						</div>
+					</div>
+								
+				</form>				
+			</div>		
+			<div th:if="${eliminado}" class="mt-4">
+				<h2 class="text-danger">Coche eliminado</h2>
+			</div>
+		<hr>		
+		<a th:href="@{/crear}" class="btn btn-success mt-4">Volver al registro</a>
+	</div>
+</body>
+
+</html>
